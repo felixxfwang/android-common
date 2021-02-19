@@ -3,4 +3,5 @@ apply from: rootProject.file('gradle/test.gradle')
 
 dependencies {
     api "com.alibaba:arouter-api:1.5.0"
+    implementation project(':common:base')
 }
