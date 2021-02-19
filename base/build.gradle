@@ -1,0 +1,9 @@
+apply from: rootProject.file('gradle/library.gradle')
+apply from: rootProject.file('gradle/test.gradle')
+
+dependencies {
+    api 'com.qmuiteam:qmui:2.0.0-alpha02'
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    implementation project(':basic:page-modular')
+}
