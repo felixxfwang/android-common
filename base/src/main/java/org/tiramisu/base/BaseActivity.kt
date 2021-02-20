@@ -3,13 +3,13 @@ package org.tiramisu.base
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 import org.tiramisu.page.modular.activity.IActivityModularPage
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseActivity<BINDING: ViewBinding>: FragmentActivity(), IActivityModularPage {
+abstract class BaseActivity<BINDING: ViewBinding>: AppCompatActivity(), IActivityModularPage {
     protected lateinit var binding: BINDING
 
     @Suppress("UNCHECKED_CAST")
