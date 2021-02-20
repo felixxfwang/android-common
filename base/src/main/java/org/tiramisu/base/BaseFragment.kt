@@ -22,13 +22,17 @@ abstract class BaseFragment<BINDING: ViewBinding> : Fragment() {
                 val clazz = type.actualTypeArguments.first() as Class<*>
                 val method = clazz.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
                 binding = method.invoke(null, inflater, container, false) as BINDING
-                onInitialize(binding)
                 return binding.root
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
         return null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onInitialize(binding)
     }
 
     fun startFragment(fragment: Fragment, addToBackStack: Boolean = false) {
