@@ -5,23 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.tiramisu.page.modular.fragment.IFragmentModularPage
+import androidx.viewbinding.ViewBinding
+import java.lang.reflect.ParameterizedType
 
-abstract class BaseFragment : Fragment(), IFragmentModularPage {
+/**
+ * @author felixxfwang
+ */
+abstract class BaseFragment<BINDING: ViewBinding> : Fragment() {
 
-    final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return modular.onFragmentViewPreCreate(this) ?: doOnCreateView(inflater, container, savedInstanceState)
+    protected lateinit var binding: BINDING
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val type = this.javaClass.genericSuperclass
+        if (type is ParameterizedType) {
+            try {
+                val clazz = type.actualTypeArguments.first() as Class<*>
+                val method = clazz.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
+                binding = method.invoke(inflater, container, false) as BINDING
+                return binding.root
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        onInitialize(binding)
+        return null
     }
 
-    abstract fun doOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        modular.onHiddenChanged(hidden)
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        modular.onSetUserVisibleHint(isVisibleToUser)
-    }
+    abstract fun onInitialize(binding: BINDING)
 }
