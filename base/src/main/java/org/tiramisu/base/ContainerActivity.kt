@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import org.tiramisu.base.databinding.ActivityContainerBinding
 
-abstract class ContainerActivity: BaseActivity<ActivityContainerBinding>() {
+abstract class ContainerActivity: BaseFragmentActivity<ActivityContainerBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
