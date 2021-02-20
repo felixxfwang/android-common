@@ -1,15 +1,13 @@
 package org.tiramisu.base
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper
-import org.tiramisu.page.modular.activity.IActivityModularPage
 import java.lang.reflect.ParameterizedType
 
-abstract class BaseActivity<BINDING: ViewBinding>: AppCompatActivity(), IActivityModularPage {
+abstract class BaseActivity<BINDING: ViewBinding>: AppCompatActivity() {
     protected lateinit var binding: BINDING
 
     @Suppress("UNCHECKED_CAST")
@@ -29,10 +27,5 @@ abstract class BaseActivity<BINDING: ViewBinding>: AppCompatActivity(), IActivit
 
         // 设置沉浸式透明标题栏
         QMUIStatusBarHelper.translucent(this)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        modular.onActivityResult(requestCode, resultCode, data)
     }
 }

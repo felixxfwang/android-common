@@ -21,13 +21,13 @@ abstract class BaseFragment<BINDING: ViewBinding> : Fragment() {
             try {
                 val clazz = type.actualTypeArguments.first() as Class<*>
                 val method = clazz.getMethod("inflate", LayoutInflater::class.java, ViewGroup::class.java, Boolean::class.java)
-                binding = method.invoke(inflater, container, false) as BINDING
+                binding = method.invoke(null, inflater, container, false) as BINDING
+                onInitialize(binding)
                 return binding.root
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        onInitialize(binding)
         return null
     }
 

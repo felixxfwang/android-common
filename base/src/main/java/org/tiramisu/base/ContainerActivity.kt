@@ -3,10 +3,9 @@ package org.tiramisu.base
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.viewbinding.ViewBinding
-import org.tiramisu.base.databinding.ActivityProfileBinding
+import org.tiramisu.base.databinding.ActivityContainerBinding
 
-abstract class ContainerActivity: BaseActivity<ActivityProfileBinding>() {
+abstract class ContainerActivity: BaseActivity<ActivityContainerBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
