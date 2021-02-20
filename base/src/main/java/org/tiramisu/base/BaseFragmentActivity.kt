@@ -6,9 +6,9 @@ import androidx.navigation.findNavController
 import androidx.viewbinding.ViewBinding
 import org.tiramisu.base.navigation.useFixFragmentNavigator
 
-abstract class BaseFragmentActivity<BINDING: ViewBinding>(
+abstract class BaseFragmentActivity(
     private val containerId: Int = 0
-): BaseActivity<BINDING>() {
+): BaseActivity() {
 
     protected abstract fun getContainerId(): Int
 

@@ -36,14 +36,14 @@ abstract class BaseFragment<BINDING: ViewBinding> : Fragment() {
     }
 
     fun startFragment(fragment: Fragment, addToBackStack: Boolean = false) {
-        (activity as? BaseFragmentActivity<*>)?.startFragment(fragment, addToBackStack)
+        (activity as? BaseFragmentActivity)?.startFragment(fragment, addToBackStack)
     }
 
     fun popFragment(addToBackStack: Boolean = false) {
         if (addToBackStack) {
             parentFragmentManager.popBackStack()
         } else {
-            (activity as? BaseFragmentActivity<*>)?.popFragment(this)
+            (activity as? BaseFragmentActivity)?.popFragment(this)
         }
     }
 
