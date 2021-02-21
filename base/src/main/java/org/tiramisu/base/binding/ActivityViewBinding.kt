@@ -9,7 +9,7 @@ import kotlin.reflect.KProperty
  */
 class ActivityViewBinding<T: ViewBinding>(clazz: Class<T>): BindingProperty<Activity, T>() {
 
-    private var inflater = clazz.inflateMethod()
+    private var inflater = clazz.activityInflateMethod()
 
     override fun getValue(thisRef: Activity, property: KProperty<*>): T {
         return viewBinding ?: initBiding(thisRef)
@@ -17,7 +17,6 @@ class ActivityViewBinding<T: ViewBinding>(clazz: Class<T>): BindingProperty<Acti
 
     private fun initBiding(thisRef: Activity): T {
         val bind = inflater.invoke(null, thisRef.layoutInflater) as T
-        thisRef.setContentView(bind.root)
         return bind.apply { viewBinding = this }
     }
 }
