@@ -32,11 +32,6 @@ abstract class BaseFragment<BINDING: ViewBinding, VM: ViewModel> : Fragment() {
         return null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        onInitialize(binding)
-    }
-
     fun startFragment(fragment: Fragment, addToBackStack: Boolean = false) {
         (activity as? BaseFragmentActivity)?.startFragment(fragment, addToBackStack)
     }
@@ -48,6 +43,4 @@ abstract class BaseFragment<BINDING: ViewBinding, VM: ViewModel> : Fragment() {
             (activity as? BaseFragmentActivity)?.popFragment(this)
         }
     }
-
-    abstract fun onInitialize(binding: BINDING)
 }
