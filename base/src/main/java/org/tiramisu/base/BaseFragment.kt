@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
 /**
  * @author felixxfwang
  */
-abstract class BaseFragment<BINDING: ViewBinding> : Fragment() {
+abstract class BaseFragment<BINDING: ViewBinding, VM: ViewModel> : Fragment() {
 
     protected lateinit var binding: BINDING
+    protected abstract val vm: VM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val type = this.javaClass.genericSuperclass
