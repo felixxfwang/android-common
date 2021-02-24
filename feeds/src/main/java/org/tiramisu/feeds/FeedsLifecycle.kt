@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import org.tiramisu.feeds.data.IChannelModel
 import org.tiramisu.page.modular.fragment.IFragmentModularPage
 
-fun IFragmentModularPage.bindFeedsLifecycle(recyclerView: RecyclerView) {
+fun IFragmentModularPage<*, *>.bindFeedsLifecycle(recyclerView: RecyclerView) {
     modular.addModule(FeedsLifecycleModule(recyclerView))
 }
 
-fun IFragmentModularPage.getFeedsChannel(): IChannelModel? {
+fun IFragmentModularPage<*, *>.getFeedsChannel(): IChannelModel? {
     return modular.getModule<FeedsLifecycleModule>()?.channel
 }
 

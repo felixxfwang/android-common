@@ -3,7 +3,9 @@ package org.tiramisu.feeds
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import org.tiramisu.feeds.data.IChannelModel
 import org.tiramisu.feeds.lifecycle.IListViewLifecycle
 import org.tiramisu.log.TLog
@@ -13,7 +15,7 @@ import org.tiramisu.page.modular.fragment.IFragmentModule
 
 class FeedsLifecycleModule(
     private val recycler: RecyclerView
-) : BaseFragmentModule<IPageModuleManager>() {
+) : BaseFragmentModule<IPageModuleManager, ViewBinding, ViewModel>() {
 
     companion object {
         private const val TAG = "FragmentListModule"
