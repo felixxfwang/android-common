@@ -1,5 +1,6 @@
 package org.tiramisu.modular
 
+import android.content.Context
 import org.tiramisu.base.BaseApplication
 
 /**
@@ -7,6 +8,12 @@ import org.tiramisu.base.BaseApplication
  */
 open class ModularApplication: BaseApplication() {
     private val modular = ModularManager()
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+
+        modular.onAttachBaseContext(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

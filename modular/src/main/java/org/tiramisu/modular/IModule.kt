@@ -9,6 +9,8 @@ interface IModule {
      */
     fun name(): String
 
+    fun onAttachBaseContext(application: Application) {}
+
     /**
      * 初始化组件
      */
