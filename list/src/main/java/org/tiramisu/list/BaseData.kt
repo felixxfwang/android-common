@@ -3,9 +3,10 @@ package org.tiramisu.list
 /**
  * @author felixxfwang
  */
-open class BaseData {
+abstract class BaseData {
+    abstract var type: Int
 }
 
-open class BaseSelectableData: BaseData(), Selectable {
+abstract class BaseSelectableData: BaseData(), Selectable {
     override var selected: Boolean = false
 }
