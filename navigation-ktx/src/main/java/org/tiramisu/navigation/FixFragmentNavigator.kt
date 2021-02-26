@@ -1,4 +1,4 @@
-package org.tiramisu.base.navigation
+package org.tiramisu.navigation
 
 import android.content.Context
 import android.os.Bundle
@@ -150,9 +150,4 @@ class FixFragmentNavigator(context: Context, manager: FragmentManager, container
     private fun generateBackStackName(backIndex: Int, destid: Int): String {
         return "$backIndex-$destid"
     }
-}
-
-fun NavController.useFixFragmentNavigator(context: Context, manager: FragmentManager, containerId: Int) {
-    val navigator = FixFragmentNavigator(context, manager, containerId)
-    navigatorProvider.addNavigator(navigator)
 }
