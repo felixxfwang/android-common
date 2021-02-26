@@ -1,5 +1,7 @@
 package org.tiramisu.list
 
-interface OnItemClickListener<T> {
-    fun onItemClick(data: T)
+import android.view.View
+
+interface OnItemClickListener {
+    fun onItemClick(view: View, position: Int, data: BaseData)
 }

@@ -27,10 +27,8 @@ class MultiTypeAdapter: BaseAdapter<BaseData, ListViewHolder<ViewBinding>>() {
         return ListViewHolder(get(viewType).onCreateBinding(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder<ViewBinding>, position: Int) {
-        val data = getDataList()[position]
-        holder.itemView.setOnClickListener { get(data.type).onItemViewClick(data) }
-        super.onBindViewHolder(holder, position)
+    override fun onItemClick(holder: ListViewHolder<ViewBinding>, position: Int, data: BaseData) {
+        get(getItemViewType(position)).onItemViewClick(holder.binding, position, data)
     }
 
     override fun onBindViewHolder(holder: ListViewHolder<ViewBinding>, data: BaseData) {

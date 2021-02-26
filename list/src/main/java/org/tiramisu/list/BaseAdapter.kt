@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseAdapter<DATA: BaseData, VH: RecyclerView.ViewHolder>: RecyclerView.Adapter<VH>() {
     private var data: MutableList<DATA> = ArrayList()
+    var onItemClickListener: OnItemClickListener? = null
 
     fun setDataList(data: List<DATA>) {
         this.data.clear()
@@ -19,8 +20,15 @@ abstract class BaseAdapter<DATA: BaseData, VH: RecyclerView.ViewHolder>: Recycle
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        onBindViewHolder(holder, data[position])
+        val data = getDataList()[position]
+        holder.itemView.setOnClickListener {
+            onItemClick(holder, position, data)
+            onItemClickListener?.onItemClick(holder.itemView, position, data)
+        }
+        onBindViewHolder(holder, data)
     }
+
+    open fun onItemClick(holder: VH, position: Int, data: BaseData) {}
 
     abstract fun onBindViewHolder(holder: VH, data: DATA)
 }

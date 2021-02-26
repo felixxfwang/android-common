@@ -8,5 +8,5 @@ interface IItemViewBinder {
     fun onBindView(binding: ViewBinding, data: BaseData)
     fun canBindView(binding: ViewBinding, data: BaseData): Boolean
 
-    fun onItemViewClick(data: BaseData)
+    fun onItemViewClick(binding: ViewBinding, position: Int, data: BaseData)
 }
