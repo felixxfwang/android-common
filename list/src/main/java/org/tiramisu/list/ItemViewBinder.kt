@@ -37,6 +37,8 @@ abstract class ItemViewBinder<BINDING: ViewBinding, DATA: BaseData>: IItemViewBi
 }
 
 class DefaultItemViewBinder: IItemViewBinder {
+    override val viewType: Int = Int.MIN_VALUE
+
     override fun onCreateBinding(inflater: LayoutInflater): ViewBinding = ViewBinding { View(inflater.context) }
 
     override fun onBindView(binding: ViewBinding, data: BaseData) {}

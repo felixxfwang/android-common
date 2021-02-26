@@ -13,9 +13,7 @@ class MultiTypeAdapter: BaseAdapter<BaseData, ListViewHolder<ViewBinding>>() {
     private val registry = SparseArrayCompat<IItemViewBinder>()
     private val defaultBinder = DefaultItemViewBinder()
 
-    fun register(type: Int, binder: IItemViewBinder) {
-        registry.put(type, binder)
-    }
+    fun register(vararg binders: IItemViewBinder) = binders.forEach { registry.put(it.viewType, it) }
 
     private fun get(type: Int): IItemViewBinder = registry.get(type) ?: defaultBinder
 
