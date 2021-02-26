@@ -16,7 +16,7 @@ import java.util.ArrayDeque
 /**
  * Create by liwen on 2020/6/2
  */
-@Navigator.Name("fragment")
+@Navigator.Name("fix_fragment")
 class FixFragmentNavigator(context: Context, manager: FragmentManager, containerId: Int) :
     FragmentNavigator(context, manager, containerId) {
 
@@ -148,10 +148,8 @@ class FixFragmentNavigator(context: Context, manager: FragmentManager, container
      * 在父类是 private的  直接定义一个方法即可
      */
     private fun generateBackStackName(backIndex: Int, destid: Int): String {
-        return "$backIndex - $destid"
+        return "$backIndex-$destid"
     }
-
-
 }
 
 fun NavController.useFixFragmentNavigator(context: Context, manager: FragmentManager, containerId: Int) {
