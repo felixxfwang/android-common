@@ -16,7 +16,7 @@ import java.util.ArrayDeque
 /**
  * Create by liwen on 2020/6/2
  */
-@Navigator.Name("fixFragment")
+@Navigator.Name("fragment")
 class FixFragmentNavigator(context: Context, manager: FragmentManager, containerId: Int) :
     FragmentNavigator(context, manager, containerId) {
 
