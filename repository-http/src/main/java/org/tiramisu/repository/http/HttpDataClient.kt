@@ -7,13 +7,14 @@ import org.tiramisu.repository.*
 class HttpDataClient<PARAM: HttpParam, RESULT: Any>(
     baseUrl: String,
     private val path: String,
-    private val rspClass: Class<RESULT>
+    private val rspClass: Class<RESULT>,
+    private val deserializer: HttpResponseDeserializable<RESULT>? = null
 ) : DataClient<PARAM, RESULT> {
 
     private val http = TiramisuHttp().baseUrl(baseUrl)
 
     override fun sendDataRequest(param: PARAM): DataResult<RESULT> {
-        return when (val result = http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param)) {
+        return when (val result = http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param, deserializer = deserializer)) {
             is Result.Success -> DataResult.success(result.get())
             is Result.Failure -> DataResult.error(DataException(result.error.code, result.error.message, result.error.cause))
         }
@@ -24,7 +25,7 @@ class HttpDataClient<PARAM: HttpParam, RESULT: Any>(
         callback: DataCallback<PARAM, RESULT>
     ): Disposable {
         return HttpDisposable(
-            http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param, callback = HttpDataCallback(callback))
+            http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param, deserializer = deserializer, callback = HttpDataCallback(callback))
         )
     }
 

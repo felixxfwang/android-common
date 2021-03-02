@@ -3,6 +3,7 @@ package org.tiramisu.repository.http
 import kotlinx.coroutines.withContext
 import org.tiramisu.http.HttpMethod
 import org.tiramisu.http.HttpParam
+import org.tiramisu.http.HttpResponseDeserializable
 import org.tiramisu.http.Result
 import org.tiramisu.http.TiramisuHttp
 import org.tiramisu.repository.DataException
@@ -13,7 +14,8 @@ import kotlin.coroutines.CoroutineContext
 class HttpCoroutineDataClient <PARAM: HttpParam, RESULT: Any>(
     baseUrl: String,
     private val path: String,
-    private val rspClass: Class<RESULT>
+    private val rspClass: Class<RESULT>,
+    private val deserializer: HttpResponseDeserializable<RESULT>? = null
 ) : CoroutineDataClient<PARAM, RESULT> {
 
     private val http = TiramisuHttp().baseUrl(baseUrl)
@@ -23,7 +25,7 @@ class HttpCoroutineDataClient <PARAM: HttpParam, RESULT: Any>(
     }
 
     private fun doSendRequest(param: PARAM): DataResult<RESULT> {
-        return when (val result = http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param)) {
+        return when (val result = http.client.sendHttpRequest(http.wrapUrl(path), HttpMethod.GET, rspClass, param, deserializer = deserializer)) {
             is Result.Success -> DataResult.success(result.get())
             is Result.Failure -> DataResult.error(DataException(result.error.code, result.error.message, result.error.cause))
         }
