@@ -17,6 +17,13 @@ class TFirebaseAnalytics: IAnalytics {
         FirebaseApp.initializeApp(application)
     }
 
+    override fun traceScreen(screenName: String, screenClass: Class<*>, bundle: Bundle?) {
+        val params = bundle ?: Bundle()
+        params.putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+        params.putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass.name)
+        analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+    }
+
     override fun logEvent(event: String, bundle: Bundle?) {
         analytics.logEvent(event, bundle)
     }
