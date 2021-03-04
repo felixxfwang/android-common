@@ -7,10 +7,15 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 
 class FirebaseRemoteConfig : IRemoteConfig {
 
-    override fun initialize(application: Application) {
+    override fun initialize(application: Application, defaultResId: Int) {
         val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 600
+            minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) 20 else 600
         }
-        Firebase.remoteConfig.setConfigSettingsAsync(configSettings)
+        Firebase.remoteConfig.apply {
+            setConfigSettingsAsync(configSettings)
+
+            // 设置默认值
+            setDefaultsAsync(defaultResId)
+        }
     }
 }

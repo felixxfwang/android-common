@@ -7,5 +7,5 @@ import android.app.Application
  */
 interface IRemoteConfig {
 
-    fun initialize(application: Application)
+    fun initialize(application: Application, defaultResId: Int)
 }
