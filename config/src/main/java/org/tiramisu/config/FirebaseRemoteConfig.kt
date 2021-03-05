@@ -1,6 +1,7 @@
 package org.tiramisu.config
 
 import android.app.Application
+import android.os.Bundle
 import com.google.android.gms.tasks.Task
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -16,6 +17,7 @@ class FirebaseRemoteConfig : IRemoteConfig {
 
     private var task: Task<Boolean>? = null
     private val fetched = AtomicBoolean(false)
+    private var debugConfig: Bundle? = null
 
     override fun initialize(application: Application, defaultResId: Int) {
         val configSettings = remoteConfigSettings {
@@ -34,13 +36,18 @@ class FirebaseRemoteConfig : IRemoteConfig {
         }
     }
 
-    override fun doWhenFetchActivated(action: () -> Unit) {
-        task?.addOnCompleteListener { action.invoke() }
+    override fun doWhenFetchActivated(action: (IKeyValueQuerier) -> Unit) {
+        val querier = debugConfig?.let { BundleKeyValueQuerier(it) } ?: TRemoteConfig
+        task?.addOnCompleteListener { action.invoke(querier) }
         if (fetched.get()) {
             TLog.i(TAG, "remote config fetched, do action directly.")
-            action.invoke()
+            action.invoke(querier)
         } else {
             TLog.i(TAG, "remote config not fetched, do action when fetched.")
         }
+    }
+
+    override fun setDebugConfig(bundle: Bundle) {
+        this.debugConfig = bundle
     }
 }

@@ -8,6 +8,6 @@ interface IKeyValueQuerier {
 
     fun getInt(key: String): Int
 
-    fun getValue(key: String): IConfigValue
+    fun getValue(key: String): IConfigValue?
 
 }

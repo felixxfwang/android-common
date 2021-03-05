@@ -1,5 +1,6 @@
 package org.tiramisu.config
 
+import android.os.Bundle
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -17,9 +18,19 @@ class FirebaseKeyValueQuerier : IKeyValueQuerier {
         return Firebase.remoteConfig.getLong(key).toInt()
     }
 
-    override fun getValue(key: String): IConfigValue {
+    override fun getValue(key: String): IConfigValue? {
         return ConfigValueWrapper(Firebase.remoteConfig.getValue(key))
     }
+}
+
+class BundleKeyValueQuerier(private val bundle: Bundle): IKeyValueQuerier {
+    override fun getString(key: String): String = bundle.getString(key, "")
+
+    override fun getBoolean(key: String): Boolean = bundle.getBoolean(key)
+
+    override fun getInt(key: String): Int = bundle.getInt(key)
+
+    override fun getValue(key: String): IConfigValue? = null
 }
 
 class ConfigValueWrapper(private val value: FirebaseRemoteConfigValue): IConfigValue {
