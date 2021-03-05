@@ -1,16 +1,14 @@
 package org.tiramisu.appupdate
 
-import android.app.Dialog
 import android.content.Context
-import android.view.View
 import com.blankj.utilcode.util.AppUtils
 import org.tiramisu.utils.AppMarketUtil
 
-interface IAppUpdateProvider {
+interface IUpdateProvider {
 
     fun fetchAppUpdateData(receiver: (AppUpdateData) -> Unit)
 
-    fun buildPromptView(dialog: Dialog, data: AppUpdateData): View? = null
+    fun getAppUpdatePrompter(): IUpdatePrompter? = null
 
     /**
      * 执行更新操作，默认跳GooglePlay
