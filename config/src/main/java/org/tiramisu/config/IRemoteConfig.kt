@@ -8,4 +8,6 @@ import android.app.Application
 interface IRemoteConfig {
 
     fun initialize(application: Application, defaultResId: Int)
+
+    fun doWhenFetchActivated(action: () -> Unit)
 }
