@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@android:color/darker_gray">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/app_update_title"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/app_update_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/do_app_update"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skip_app_update"
+            android:layout_toStartOf="@id/update"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

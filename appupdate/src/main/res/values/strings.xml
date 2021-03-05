@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="do_app_update">Update</string>
+    <string name="skip_app_update">Skip</string>
+    <string name="app_update_title">App Update</string>
+    <string name="app_update_content">Update Please!</string>
+</resources>
