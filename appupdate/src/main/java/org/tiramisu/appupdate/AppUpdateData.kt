@@ -7,15 +7,14 @@ import kotlin.math.max
  * @author felixxfwang
  */
 data class AppUpdateData(
-    val minAppVersion: Int,
-    val latestAppVersion: Int,
-    val updateTitle: String = "",
-    val updateContent: String = ""
+    val min_app_version: Int = 0,
+    val latest_app_version: Int = 0,
+    val title: String? = null,
+    val content: String? = null
 )
 
+val AppUpdateData.targetVerCode: Int get() = max(min_app_version, latest_app_version)
 
-val AppUpdateData.targetVerCode: Int get() = max(minAppVersion, latestAppVersion)
+fun AppUpdateData.isForceUpdate() = min_app_version > AppUtils.getAppVersionCode()
 
-fun AppUpdateData.isForceUpdate() = minAppVersion > AppUtils.getAppVersionCode()
-
-fun AppUpdateData.hasUpdate() = latestAppVersion > AppUtils.getAppVersionCode()
+fun AppUpdateData.hasUpdate() = latest_app_version > AppUtils.getAppVersionCode()

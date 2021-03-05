@@ -36,8 +36,8 @@ object TAppUpdater {
     }
 
     private fun bind(context: Context, dialog: AlertDialog, binding: IUpdatePrompter, data: AppUpdateData) {
-        if (data.updateTitle.isNotBlank()) binding.title.text = data.updateTitle
-        if (data.updateContent.isNotBlank()) binding.content.text = data.updateContent
+        if (!data.title.isNullOrBlank()) binding.title.text = data.title
+        if (!data.content.isNullOrBlank()) binding.content.text = data.content
         if (data.isForceUpdate()) {
             binding.skipper.visibility = View.GONE
             dialog.setCancelable(false)
