@@ -35,8 +35,7 @@ class FirebaseRemoteConfig : IRemoteConfig {
     }
 
     override fun doWhenFetchActivated(action: () -> Unit) {
-        val listener = { _: Task<Boolean> -> action.invoke() }
-        task?.addOnCompleteListener(listener)
+        task?.addOnCompleteListener { action.invoke() }
         if (fetched.get()) {
             TLog.i(TAG, "remote config fetched, do action directly.")
             action.invoke()
