@@ -18,4 +18,6 @@ abstract class ContainerActivity: BaseFragmentActivity() {
     }
 
     abstract fun getFragment(): Fragment
+
+    override fun getContainerId(): Int = R.id.container
 }

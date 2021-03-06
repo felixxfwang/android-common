@@ -1,0 +1,7 @@
+apply from: rootProject.file('buildscripts/library.gradle')
+
+dependencies {
+    implementation project(':common:base')
+
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+}
