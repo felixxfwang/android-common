@@ -7,4 +7,5 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 
     implementation project(':basic:page-modular')
+    implementation project(':basic:log')
 }

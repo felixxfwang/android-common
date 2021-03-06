@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import org.tiramisu.log.TLog
 import java.lang.reflect.ParameterizedType
 
 /**
  * @author felixxfwang
  */
 abstract class BaseFragment<BINDING: ViewBinding, VM: ViewModel> : Fragment() {
+
+    companion object {
+        private const val TAG = "BaseFragment"
+    }
 
     protected lateinit var binding: BINDING
     protected abstract val vm: VM
@@ -26,7 +31,7 @@ abstract class BaseFragment<BINDING: ViewBinding, VM: ViewModel> : Fragment() {
                 binding = method.invoke(null, inflater, container, false) as BINDING
                 return binding.root
             } catch (e: Exception) {
-                e.printStackTrace()
+                TLog.e(TAG, "view binding inflate failed", e)
             }
         }
         return null
