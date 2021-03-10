@@ -13,8 +13,15 @@ import com.google.firebase.ktx.Firebase
 class TFirebaseAnalytics: IAnalytics {
     private val analytics: FirebaseAnalytics by lazy { Firebase.analytics }
 
-    override fun initialize(application: Application) {
+    override fun initialize(application: Application, userProperties: Map<String, String>?) {
         FirebaseApp.initializeApp(application)
+        userProperties?.let { setUerProperties(it) }
+    }
+
+    override fun setUerProperties(properties: Map<String, String>) {
+        properties.forEach {
+            analytics.setUserProperty(it.key, it.value)
+        }
     }
 
     override fun traceScreen(screenName: String, screenClass: Class<*>, bundle: Bundle?) {

@@ -5,7 +5,9 @@ import android.os.Bundle
 
 interface IAnalytics {
 
-    fun initialize(application: Application)
+    fun initialize(application: Application, userProperties: Map<String, String>? = null)
+
+    fun setUerProperties(properties: Map<String, String>)
 
     fun traceScreen(screenName: String, screenClass: Class<*>, bundle: Bundle? = null)
 
