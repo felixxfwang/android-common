@@ -2,6 +2,7 @@ package org.tiramisu.analysis
 
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
@@ -11,6 +12,10 @@ import com.google.firebase.ktx.Firebase
  * @author felixxfwang
  */
 class TFirebaseAnalytics: IAnalytics {
+    companion object {
+        private const val TAG = "TFirebaseAnalytics"
+    }
+
     private val analytics: FirebaseAnalytics by lazy { Firebase.analytics }
 
     override fun initialize(application: Application, userProperties: Map<String, String>?) {
@@ -32,6 +37,9 @@ class TFirebaseAnalytics: IAnalytics {
     }
 
     override fun logEvent(event: String, bundle: Bundle?) {
+        if (BuildConfig.DEBUG) {
+            Log.i(TAG, "logEvent: $event, params=$bundle")
+        }
         analytics.logEvent(event, bundle)
     }
 
