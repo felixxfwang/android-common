@@ -18,6 +18,7 @@ class WebViewFragment: BaseFragment<FragmentWebviewBinding, WebViewModel>() {
         const val KEY_URL = "url"
         const val KEY_TITLE = "title"
         const val KEY_SHOW_BACK = "show_back"
+        const val KEY_SHOW_OK = "show_ok"
     }
 
     override val vm: WebViewModel by viewModels()
