@@ -1,0 +1,5 @@
+apply from: rootProject.file('buildscripts/library.gradle')
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
+}
